@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cursinho para Institutos Federais por R$ 29,90 ao mês</title>
+<meta name="description" content="Cursinho online preparatório para a seleção dos Institutos Federais, com simulados, banco de questões e apoio de IA por R$ 29,90 ao mês. Entre na lista de espera.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --verde:#2F9E41;
+  --verde-escuro:#0E4A2A;
+  --verde-claro:#E4F3E3;
+  --papel:#F6FAF4;
+  --branco:#FFFFFF;
+  --vermelho:#C8191F;
+  --tinta:#13281C;
+  --tinta-suave:#43594A;
+  --linha:#CFE0CF;
+  --raio:14px;
+  --titulo:"Bricolage Grotesque",system-ui,sans-serif;
+  --texto:"Figtree",system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--texto);font-size:1.0625rem;line-height:1.6;color:var(--tinta);background:var(--papel);-webkit-font-smoothing:antialiased}
+img,svg{display:block;max-width:100%}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--vermelho);outline-offset:3px;border-radius:4px}
+.wrap{width:min(1120px,100% - 40px);margin-inline:auto}
+h1,h2,h3{font-family:var(--titulo);line-height:1.08;letter-spacing:-.02em;font-weight:800}
+h2{font-size:clamp(1.9rem,4vw,2.9rem);max-width:20ch}
+h3{font-size:1.25rem;letter-spacing:-.01em}
+p{max-width:62ch}
+.lead{font-size:1.2rem;color:var(--tinta-suave)}
+
+/* barras do IF como divisor estrutural */
+.barras{display:flex;gap:6px;height:44px;align-items:flex-end}
+.barras i{display:block;width:10px;background:var(--verde);border-radius:2px}
+.barras i:nth-child(1){height:100%}
+.barras i:nth-child(2){height:70%}
+.barras i:nth-child(3){height:100%;background:var(--vermelho)}
+.barras i:nth-child(4){height:45%}
+
+/* botões */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;font:700 1.05rem var(--texto);padding:.95rem 1.7rem;border-radius:999px;border:0;cursor:pointer;text-decoration:none;transition:transform .15s,background .15s}
+.btn:active{transform:translateY(1px)}
+.btn-vermelho{background:var(--vermelho);color:#fff}
+.btn-vermelho:hover{background:#a81419}
+.btn-contorno{background:transparent;color:var(--verde-escuro);box-shadow:inset 0 0 0 2px var(--verde-escuro)}
+.btn-contorno:hover{background:var(--verde-escuro);color:#fff}
+
+/* topo */
+.topo{position:sticky;top:0;z-index:20;background:rgba(246,250,244,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--linha)}
+.topo .wrap{display:flex;align-items:center;justify-content:space-between;height:68px;gap:1rem}
+.marca{display:flex;align-items:center;gap:.7rem;text-decoration:none}
+.marca svg{width:38px;height:38px}
+.marca b{font:800 1.15rem var(--titulo);letter-spacing:-.01em;line-height:1.1}
+.marca small{display:block;font:500 .78rem var(--texto);color:var(--tinta-suave);letter-spacing:0}
+.topo nav{display:flex;gap:1.6rem;align-items:center}
+.topo nav a:not(.btn){text-decoration:none;font-weight:600;font-size:.95rem;color:var(--tinta-suave)}
+.topo nav a:not(.btn):hover{color:var(--verde-escuro)}
+.topo .btn{padding:.6rem 1.2rem;font-size:.95rem}
+
+/* hero */
+.hero{padding:clamp(2.5rem,6vw,5rem) 0 clamp(3rem,7vw,6rem);background:
+  linear-gradient(180deg,var(--papel) 0,var(--papel) 100%)}
+.hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(2rem,5vw,4.5rem);align-items:center}
+.hero h1{font-size:clamp(2.5rem,6vw,4.6rem);margin:1.2rem 0 1.4rem;color:var(--verde-escuro)}
+.hero h1 em{font-style:normal;background:linear-gradient(transparent 62%,rgba(200,25,31,.22) 62%);padding:0 .1em}
+.hero .acoes{display:flex;flex-wrap:wrap;gap:.9rem;margin-top:2rem}
+.hero .nota{margin-top:1.1rem;font-size:.95rem;color:var(--tinta-suave)}
+
+/* cartão-resposta */
+.cartao{background:var(--branco);border:2px solid var(--verde-escuro);border-radius:var(--raio);padding:1.4rem 1.4rem 1.2rem;box-shadow:10px 10px 0 var(--verde);position:relative;transform:rotate(1.2deg)}
+.cartao header{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:2px dashed var(--linha);padding-bottom:.8rem;margin-bottom:1rem}
+.cartao header b{font:800 1.05rem var(--titulo)}
+.cartao header span{font-size:.85rem;color:var(--tinta-suave)}
+.gab{display:grid;grid-template-columns:2rem repeat(5,1fr);gap:.55rem .4rem;align-items:center;justify-items:center}
+.gab .q{font:700 .9rem var(--titulo);color:var(--tinta-suave);justify-self:start}
+.gab .cab{font-size:.78rem;font-weight:700;color:var(--tinta-suave)}
+.bol{width:30px;height:30px;border-radius:50%;border:2px solid var(--tinta-suave);background:transparent;cursor:pointer;font:700 .72rem var(--texto);color:var(--tinta-suave);transition:background .25s,border-color .25s,color .25s,transform .15s;display:grid;place-items:center}
+.bol:hover{transform:scale(1.1)}
+.bol.on{background:var(--verde);border-color:var(--verde);color:#fff}
+.bol.erro{background:var(--vermelho);border-color:var(--vermelho);color:#fff}
+.cartao footer{margin-top:1.1rem;padding-top:.9rem;border-top:2px dashed var(--linha);display:flex;justify-content:space-between;align-items:center;gap:.6rem;font-size:.9rem}
+.cartao footer strong{font:800 1.4rem var(--titulo);color:var(--verde-escuro)}
+.cartao footer span{color:var(--tinta-suave)}
+.dica-cartao{margin-top:1.6rem;font-size:.85rem;color:var(--tinta-suave);text-align:center}
+
+/* seções */
+section{padding:clamp(3.5rem,8vw,6.5rem) 0}
+.cab-secao{display:flex;gap:1.6rem;align-items:flex-end;margin-bottom:2.6rem;flex-wrap:wrap}
+.cab-secao p{flex:1 1 320px}
+
+/* para quem */
+.para-quem{background:var(--verde-escuro);color:#fff}
+.para-quem h2{color:#fff}
+.para-quem .lead{color:#cfe6d3}
+.perfis{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid rgba(255,255,255,.25)}
+.perfil{padding:1.8rem 1.6rem 1.8rem 0;border-bottom:1px solid rgba(255,255,255,.25)}
+.perfil+.perfil{padding-left:1.6rem;border-left:1px solid rgba(255,255,255,.25)}
+.perfil h3{margin-bottom:.6rem}
+.perfil p{color:#cfe6d3;font-size:1rem}
+.perfil .tag{display:inline-block;margin-bottom:.9rem;font-weight:700;font-size:.85rem;background:var(--vermelho);color:#fff;border-radius:6px;padding:.15rem .6rem}
+
+/* ferramentas */
+.ferramentas .lista{display:grid;grid-template-columns:repeat(2,1fr);gap:1.4rem}
+.ferr{background:var(--branco);border:1px solid var(--linha);border-radius:var(--raio);padding:1.8rem;border-left:8px solid var(--verde)}
+.ferr:nth-child(2){border-left-color:var(--vermelho)}
+.ferr:nth-child(3){border-left-color:var(--vermelho)}
+.ferr h3{margin-bottom:.6rem}
+.ferr p{color:var(--tinta-suave)}
+.ferr ul{margin-top:1rem;list-style:none;display:grid;gap:.4rem;font-size:.98rem}
+.ferr li{padding-left:1.5rem;position:relative}
+.ferr li::before{content:"";position:absolute;left:0;top:.5em;width:.8rem;height:.8rem;border-radius:50%;background:var(--verde)}
+
+/* por que */
+.porque{background:var(--verde-claro)}
+.motivos{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.5rem,4vw,3.5rem);align-items:start}
+.motivos ol{list-style:none;counter-reset:m;display:grid;gap:1.6rem}
+.motivos li{counter-increment:m;padding-left:3.4rem;position:relative}
+.motivos li::before{content:counter(m);position:absolute;left:0;top:0;width:2.4rem;height:2.4rem;border-radius:50%;background:var(--verde-escuro);color:#fff;font:800 1.1rem var(--titulo);display:grid;place-items:center}
+.motivos li b{display:block;font:700 1.15rem var(--titulo);margin-bottom:.2rem}
+.motivos li span{color:var(--tinta-suave)}
+.comparativo{background:var(--branco);border-radius:var(--raio);border:2px solid var(--verde-escuro);overflow:hidden}
+.comparativo table{width:100%;border-collapse:collapse;font-size:.98rem}
+.comparativo th,.comparativo td{padding:.85rem 1rem;text-align:left;border-bottom:1px solid var(--linha)}
+.comparativo thead th{background:var(--verde-escuro);color:#fff;font-family:var(--titulo)}
+.comparativo thead th:last-child{background:var(--vermelho)}
+.comparativo td:last-child{font-weight:700;color:var(--verde-escuro)}
+.comparativo tr:last-child td{border-bottom:0}
+.comparativo caption{padding:.8rem 1rem;text-align:left;font-size:.85rem;color:var(--tinta-suave);caption-side:bottom;border-top:1px solid var(--linha)}
+
+/* preços */
+.planos{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;align-items:stretch}
+.plano{background:var(--branco);border:2px solid var(--linha);border-radius:var(--raio);padding:2rem 1.8rem;display:flex;flex-direction:column;position:relative}
+.plano.destaque{border-color:var(--verde-escuro);box-shadow:8px 8px 0 var(--verde)}
+.plano .selo{position:absolute;top:-14px;left:1.8rem;background:var(--vermelho);color:#fff;font-weight:700;font-size:.82rem;padding:.2rem .8rem;border-radius:999px}
+.plano h3{color:var(--tinta-suave);font-size:1.05rem;font-family:var(--texto);font-weight:700;letter-spacing:0}
+.preco{margin:.6rem 0 .3rem;font:800 3rem var(--titulo);letter-spacing:-.03em;color:var(--verde-escuro);line-height:1}
+.preco small{font:600 1rem var(--texto);color:var(--tinta-suave);letter-spacing:0}
+.plano .total{font-size:.92rem;color:var(--tinta-suave);margin-bottom:1.3rem}
+.plano ul{list-style:none;display:grid;gap:.55rem;margin-bottom:1.8rem;font-size:.98rem}
+.plano li{padding-left:1.6rem;position:relative}
+.plano li::before{content:"";position:absolute;left:.1rem;top:.35em;width:.45rem;height:.8rem;border:solid var(--verde);border-width:0 3px 3px 0;transform:rotate(40deg)}
+.plano .btn{margin-top:auto}
+.aviso-preco{margin-top:1.6rem;font-size:.9rem;color:var(--tinta-suave)}
+
+/* faq */
+.faq{background:var(--branco);border-top:1px solid var(--linha);border-bottom:1px solid var(--linha)}
+.faq .itens{max-width:780px}
+details{border-bottom:1px solid var(--linha)}
+summary{cursor:pointer;padding:1.2rem 2.5rem 1.2rem 0;font:700 1.15rem var(--titulo);position:relative;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";position:absolute;right:.4rem;top:.9rem;font-size:1.7rem;color:var(--vermelho);transition:transform .2s}
+details[open] summary::after{transform:rotate(45deg)}
+details p{padding:0 0 1.3rem;color:var(--tinta-suave)}
+
+/* formulário */
+.lista-espera{background:var(--verde);color:#fff}
+.lista-espera .wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(2rem,5vw,4.5rem);align-items:start}
+.lista-espera h2{color:#fff;max-width:14ch}
+.lista-espera .lead{color:#eaf7ea;margin-top:1.2rem}
+.lista-espera .beneficios{margin-top:1.6rem;list-style:none;display:grid;gap:.6rem;font-weight:600}
+.lista-espera .beneficios li{padding-left:1.7rem;position:relative}
+.lista-espera .beneficios li::before{content:"";position:absolute;left:.1rem;top:.3em;width:.5rem;height:.9rem;border:solid #fff;border-width:0 3px 3px 0;transform:rotate(40deg)}
+form{background:var(--branco);color:var(--tinta);border-radius:var(--raio);padding:clamp(1.4rem,3vw,2.2rem);box-shadow:10px 10px 0 var(--verde-escuro)}
+.campo{display:grid;gap:.35rem;margin-bottom:1.1rem}
+.duas{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+label{font-weight:700;font-size:.95rem}
+input,select{font:inherit;padding:.8rem .9rem;border:2px solid var(--linha);border-radius:10px;background:var(--papel);color:var(--tinta);width:100%}
+input:focus,select:focus{outline:none;border-color:var(--verde);background:#fff}
+input:user-invalid{border-color:var(--vermelho)}
+.consent{display:flex;gap:.7rem;align-items:flex-start;font-size:.9rem;color:var(--tinta-suave);margin:.4rem 0 1.4rem}
+.consent input{width:22px;height:22px;margin-top:.15rem;accent-color:var(--verde);flex:none}
+.consent label{font-weight:500;font-size:.9rem}
+form .btn{width:100%}
+.ok{display:none;text-align:center;padding:1rem 0}
+.ok.mostrar{display:block}
+.ok .check{width:68px;height:68px;border-radius:50%;background:var(--verde);margin:0 auto 1rem;display:grid;place-items:center}
+.ok .check svg{width:34px;height:34px}
+.ok h3{font-size:1.6rem;color:var(--verde-escuro);margin-bottom:.5rem}
+.ok p{margin-inline:auto;color:var(--tinta-suave)}
+.erro-form{color:var(--vermelho);font-weight:600;font-size:.92rem;margin-bottom:1rem;display:none}
+
+/* rodapé */
+footer.rodape{background:var(--verde-escuro);color:#cfe6d3;padding:2.8rem 0;font-size:.92rem}
+.rodape .wrap{display:grid;gap:1.4rem}
+.rodape .marca b{color:#fff}
+.rodape .marca small{color:#cfe6d3}
+.rodape .legal{max-width:80ch;font-size:.85rem;opacity:.9}
+
+@media (max-width:900px){
+  .hero .wrap,.motivos,.lista-espera .wrap{grid-template-columns:1fr}
+  .perfis{grid-template-columns:1fr}
+  .perfil,.perfil+.perfil{padding:1.5rem 0;border-left:0}
+  .ferramentas .lista{grid-template-columns:1fr}
+  .planos{grid-template-columns:1fr}
+  .topo nav a:not(.btn){display:none}
+  .cartao{transform:none}
+}
+@media (max-width:480px){
+  .duas{grid-template-columns:1fr}
+  .bol{width:28px;height:28px}
+  .marca small{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<header class="topo">
+  <div class="wrap">
+    <a class="marca" href="#inicio" aria-label="Cursinho IF, início">
+      <!-- Marca provisória inspirada nas barras da identidade dos IFs. Troque pelo logo oficial quando tiver autorização de uso. -->
+      <svg viewBox="0 0 48 48" aria-hidden="true">
+        <rect x="4" y="4" width="9" height="40" rx="2" fill="#2F9E41"/>
+        <rect x="16" y="4" width="9" height="28" rx="2" fill="#2F9E41"/>
+        <rect x="28" y="4" width="9" height="40" rx="2" fill="#C8191F"/>
+        <rect x="40" y="4" width="5" height="18" rx="2" fill="#2F9E41"/>
+      </svg>
+      <span><b>Cursinho IF</b><small>Preparatório para Institutos Federais</small></span>
+    </a>
+    <nav aria-label="Principal">
+      <a href="#para-quem">Para quem</a>
+      <a href="#metodo">Método</a>
+      <a href="#precos">Preço</a>
+      <a href="#duvidas">Dúvidas</a>
+      <a class="btn btn-vermelho" href="#lista-espera">Entrar na lista</a>
+    </nav>
+  </div>
+</header>
+
+<main id="inicio">
+
+<section class="hero" style="padding-bottom:clamp(3rem,7vw,6rem)">
+  <div class="wrap">
+    <div>
+      <div class="barras" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+      <h1>Sua vaga no Instituto Federal por <em>R$ 29,90</em> ao mês.</h1>
+      <p class="lead">Simulados, banco com milhares de questões e uma IA que explica cada erro seu. Um cursinho feito para quem quer passar na seleção do IF sem pesar no bolso da família.</p>
+      <div class="acoes">
+        <a class="btn btn-vermelho" href="#lista-espera">Quero entrar na lista de espera</a>
+        <a class="btn btn-contorno" href="#metodo">Ver como funciona</a>
+      </div>
+      <p class="nota">Lista de espera gratuita e sem compromisso. Você só paga quando as turmas abrirem.</p>
+    </div>
+
+    <div>
+      <div class="cartao" aria-label="Exemplo de cartão-resposta interativo">
+        <header>
+          <b>Simulado IF · Matemática</b>
+          <span>Cartão-resposta</span>
+        </header>
+        <div class="gab" id="gabarito" role="group" aria-label="Marque as alternativas"></div>
+        <footer>
+          <span>Seu resultado</span>
+          <strong id="placar">0 de 6</strong>
+        </footer>
+      </div>
+      <p class="dica-cartao">Clique nas bolinhas e teste. Verde acertou, vermelho errou.</p>
+    </div>
+  </div>
+</section>
+
+<section class="para-quem" id="para-quem">
+  <div class="wrap">
+    <div class="cab-secao">
+      <h2>Feito para quem sonha com a vaga no IF</h2>
+      <p class="lead">A seleção dos Institutos Federais é concorrida e cobra conteúdo específico. O cursinho é pensado para três perfis de estudante.</p>
+    </div>
+    <div class="perfis">
+      <article class="perfil">
+        <span class="tag">9º ano</span>
+        <h3>Quem vai prestar o ensino técnico integrado</h3>
+        <p>Você está no fim do ensino fundamental e quer estudar no IF junto com o ensino médio. Revisamos o conteúdo cobrado, de Português e Matemática, e treinamos o ritmo de prova.</p>
+      </article>
+      <article class="perfil">
+        <span class="tag">Ensino médio</span>
+        <h3>Quem busca o curso técnico subsequente</h3>
+        <p>Você já terminou ou está terminando o ensino médio e quer uma formação técnica gratuita. Estudamos o conteúdo que mais cai e como interpretar cada edital.</p>
+      </article>
+      <article class="perfil">
+        <span class="tag">Escola pública</span>
+        <h3>Quem precisa de preparo acessível</h3>
+        <p>Cursinho caro não pode ser a barreira entre você e uma vaga pública. Aqui, o preço cabe no orçamento e o estudo cabe na sua rotina, pelo celular.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="ferramentas" id="metodo">
+  <div class="wrap">
+    <div class="cab-secao">
+      <h2>Treino de prova de verdade, com IA do seu lado</h2>
+      <p class="lead">Quem passa é quem pratica. Por isso o cursinho é construído em torno de simulados e questões, com a IA ajudando a entender onde você erra.</p>
+    </div>
+    <div class="lista">
+      <article class="ferr">
+        <h3>Simulados no estilo da seleção</h3>
+        <p>Provas completas, com tempo marcado e cartão-resposta, para você chegar no dia da seleção já acostumado com a pressão.</p>
+        <ul>
+          <li>Simulados mensais com ranking entre os alunos</li>
+          <li>Correção automática na hora</li>
+          <li>Relatório de desempenho por matéria</li>
+        </ul>
+      </article>
+      <article class="ferr">
+        <h3>Banco de questões com milhares de itens</h3>
+        <p>Questões organizadas por disciplina, assunto e nível de dificuldade. Filtre o que você mais precisa treinar e resolva no seu ritmo.</p>
+        <ul>
+          <li>Questões inspiradas em provas anteriores dos IFs</li>
+          <li>Novas questões adicionadas toda semana</li>
+          <li>Resolução comentada passo a passo</li>
+        </ul>
+      </article>
+      <article class="ferr">
+        <h3>Questões geradas com apoio de IA</h3>
+        <p>A inteligência artificial ajuda a criar questões novas no formato da seleção. Toda questão passa por revisão humana antes de entrar no banco.</p>
+        <ul>
+          <li>Treino sem fim, sem repetir sempre as mesmas questões</li>
+          <li>Questões extras sobre o assunto em que você mais erra</li>
+          <li>Revisão humana para garantir o gabarito correto</li>
+        </ul>
+      </article>
+      <article class="ferr">
+        <h3>Tutor de IA para tirar dúvidas</h3>
+        <p>Errou uma questão? Pergunte por que. O tutor explica de outro jeito, com exemplos, quantas vezes você precisar, a qualquer hora.</p>
+        <ul>
+          <li>Explicações em linguagem simples</li>
+          <li>Plano de estudo ajustado aos seus pontos fracos</li>
+          <li>Disponível no celular e no computador</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="porque" id="porque">
+  <div class="wrap">
+    <div class="cab-secao">
+      <h2>Por que somos a melhor escolha para você</h2>
+    </div>
+    <div class="motivos">
+      <ol>
+        <li><b>Custa menos do que uma pizza por semana</b><span>R$ 29,90 por mês. Sem matrícula, sem taxa escondida e com cancelamento quando você quiser.</span></li>
+        <li><b>Foco total no que o IF cobra</b><span>Não perdemos tempo com o que não cai. O conteúdo gira em torno das seleções dos Institutos Federais.</span></li>
+        <li><b>Estude quando e onde puder</b><span>Tudo online, pelo celular. Ideal para quem divide o dia entre escola, casa e transporte.</span></li>
+        <li><b>Feedback imediato, o tempo todo</b><span>Com a IA, você não espera dias pela correção. Errou, entendeu, treinou de novo.</span></li>
+      </ol>
+      <div class="comparativo">
+        <table>
+          <caption>Valores médios de referência, apenas para comparação. Podem variar por cidade.</caption>
+          <thead><tr><th scope="col">O que você ganha</th><th scope="col">Cursinho tradicional</th><th scope="col">Cursinho IF</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Mensalidade</th><td style="color:var(--tinta-suave);font-weight:500">R$ 250 a R$ 600</td><td>R$ 29,90</td></tr>
+            <tr><th scope="row">Simulados</th><td style="color:var(--tinta-suave);font-weight:500">Poucos por ano</td><td>Todo mês</td></tr>
+            <tr><th scope="row">Banco de questões</th><td style="color:var(--tinta-suave);font-weight:500">Apostilas fixas</td><td>Cresce toda semana</td></tr>
+            <tr><th scope="row">Tira-dúvidas</th><td style="color:var(--tinta-suave);font-weight:500">Em horário de aula</td><td>IA, 24 horas</td></tr>
+            <tr><th scope="row">Deslocamento</th><td style="color:var(--tinta-suave);font-weight:500">Presencial</td><td>Zero, é online</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="precos">
+  <div class="wrap">
+    <div class="cab-secao">
+      <h2>Um preço que cabe no orçamento</h2>
+      <p class="lead">Escolha o plano que combina com o tempo que falta para a sua seleção. Todos incluem o acesso completo.</p>
+    </div>
+    <div class="planos">
+      <article class="plano">
+        <h3>Mensal</h3>
+        <div class="preco">R$ 29,90<small> /mês</small></div>
+        <p class="total">Cancele quando quiser</p>
+        <ul>
+          <li>Simulados mensais</li>
+          <li>Banco de questões completo</li>
+          <li>Tutor de IA</li>
+        </ul>
+        <a class="btn btn-contorno" href="#lista-espera">Entrar na lista</a>
+      </article>
+      <article class="plano destaque">
+        <span class="selo">Mais escolhido</span>
+        <h3>Semestral</h3>
+        <div class="preco">R$ 24,90<small> /mês</small></div>
+        <p class="total">R$ 149,40 cobrados a cada 6 meses</p>
+        <ul>
+          <li>Tudo do plano mensal</li>
+          <li>Plano de estudo personalizado</li>
+          <li>Relatório de evolução detalhado</li>
+        </ul>
+        <a class="btn btn-vermelho" href="#lista-espera">Entrar na lista</a>
+      </article>
+      <article class="plano">
+        <h3>Anual</h3>
+        <div class="preco">R$ 19,90<small> /mês</small></div>
+        <p class="total">R$ 238,80 cobrados uma vez por ano</p>
+        <ul>
+          <li>Tudo do plano semestral</li>
+          <li>Acesso antecipado a novos conteúdos</li>
+          <li>Revisão final antes da prova</li>
+        </ul>
+        <a class="btn btn-contorno" href="#lista-espera">Entrar na lista</a>
+      </article>
+    </div>
+    <p class="aviso-preco">Valores de exemplo, sujeitos a ajuste até a abertura das turmas. Quem entrar na lista de espera será avisado primeiro.</p>
+  </div>
+</section>
+
+<section class="faq" id="duvidas">
+  <div class="wrap">
+    <div class="cab-secao"><h2>Dúvidas frequentes</h2></div>
+    <div class="itens">
+      <details>
+        <summary>O cursinho já está funcionando?</summary>
+        <p>Estamos montando as primeiras turmas. Quem entrar na lista de espera será avisado antes da abertura das vagas e terá prioridade na matrícula.</p>
+      </details>
+      <details>
+        <summary>Para qual Instituto Federal serve?</summary>
+        <p>O conteúdo é pensado para as seleções dos Institutos Federais em geral. Cada instituto tem seu edital, e por isso usamos o formulário para saber qual é o seu.</p>
+      </details>
+      <details>
+        <summary>As questões geradas por IA são confiáveis?</summary>
+        <p>A IA ajuda a produzir questões novas, mas cada uma passa por revisão humana antes de entrar no banco. O gabarito é conferido para você não estudar errado.</p>
+      </details>
+      <details>
+        <summary>Preciso pagar para entrar na lista de espera?</summary>
+        <p>Não. A lista de espera é gratuita e não cria nenhuma obrigação. Você só decide se quer assinar quando as turmas abrirem.</p>
+      </details>
+      <details>
+        <summary>Posso estudar pelo celular?</summary>
+        <p>Sim. Todo o conteúdo funciona no celular, sem precisar instalar nada.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="lista-espera" id="lista-espera">
+  <div class="wrap">
+    <div>
+      <h2>Entre na lista de espera</h2>
+      <p class="lead">Preencha o formulário ao lado e garanta prioridade quando as primeiras turmas abrirem.</p>
+      <ul class="beneficios">
+        <li>Aviso antecipado da abertura das vagas</li>
+        <li>Prioridade na matrícula</li>
+        <li>Sem custo e sem compromisso</li>
+      </ul>
+    </div>
+
+    <div>
+      <form id="form-espera" novalidate>
+        <div id="form-campos">
+          <div class="campo">
+            <label for="nome">Nome completo</label>
+            <input id="nome" name="nome" type="text" autocomplete="name" required>
+          </div>
+          <div class="duas">
+            <div class="campo">
+              <label for="email">E-mail</label>
+              <input id="email" name="email" type="email" autocomplete="email" required>
+            </div>
+            <div class="campo">
+              <label for="whatsapp">WhatsApp com DDD</label>
+              <input id="whatsapp" name="whatsapp" type="tel" inputmode="tel" autocomplete="tel" placeholder="(00) 00000-0000" required>
+            </div>
+          </div>
+          <div class="duas">
+            <div class="campo">
+              <label for="cidade">Cidade</label>
+              <input id="cidade" name="cidade" type="text" autocomplete="address-level2" required>
+            </div>
+            <div class="campo">
+              <label for="estado">Estado</label>
+              <select id="estado" name="estado" required>
+                <option value="">Selecione</option>
+                <option>AC</option><option>AL</option><option>AP</option><option>AM</option><option>BA</option><option>CE</option><option>DF</option><option>ES</option><option>GO</option><option>MA</option><option>MT</option><option>MS</option><option>MG</option><option>PA</option><option>PB</option><option>PR</option><option>PE</option><option>PI</option><option>RJ</option><option>RN</option><option>RS</option><option>RO</option><option>RR</option><option>SC</option><option>SP</option><option>SE</option><option>TO</option>
+              </select>
+            </div>
+          </div>
+          <div class="duas">
+            <div class="campo">
+              <label for="situacao">Você está em qual etapa?</label>
+              <select id="situacao" name="situacao" required>
+                <option value="">Selecione</option>
+                <option>8º ano</option>
+                <option>9º ano</option>
+                <option>Ensino médio, cursando</option>
+                <option>Ensino médio, concluído</option>
+              </select>
+            </div>
+            <div class="campo">
+              <label for="curso">Modalidade de interesse</label>
+              <select id="curso" name="curso" required>
+                <option value="">Selecione</option>
+                <option>Técnico integrado ao ensino médio</option>
+                <option>Técnico subsequente</option>
+                <option>Ainda não sei</option>
+              </select>
+            </div>
+          </div>
+          <div class="campo">
+            <label for="instituto">Instituto Federal que você quer (opcional)</label>
+            <input id="instituto" name="instituto" type="text" placeholder="Ex.: IFSP, IFMG, IFPE, IFRJ">
+          </div>
+          <div class="consent">
+            <input id="consent" name="consent" type="checkbox" required>
+            <label for="consent">Concordo em receber contato sobre o cursinho e autorizo o uso dos meus dados apenas para esse fim. Se eu for menor de idade, um responsável está ciente.</label>
+          </div>
+          <p class="erro-form" id="erro-form" role="alert"></p>
+          <button class="btn btn-vermelho" type="submit">Enviar e entrar na lista</button>
+        </div>
+
+        <div class="ok" id="ok" role="status" aria-live="polite">
+          <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+          <h3>Você está na lista!</h3>
+          <p>Obrigado, <span id="ok-nome"></span>. Vamos te avisar por e-mail e WhatsApp assim que as vagas abrirem.</p>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="rodape">
+  <div class="wrap">
+    <div class="marca">
+      <svg viewBox="0 0 48 48" aria-hidden="true">
+        <rect x="4" y="4" width="9" height="40" rx="2" fill="#2F9E41"/>
+        <rect x="16" y="4" width="9" height="28" rx="2" fill="#2F9E41"/>
+        <rect x="28" y="4" width="9" height="40" rx="2" fill="#C8191F"/>
+        <rect x="40" y="4" width="5" height="18" rx="2" fill="#2F9E41"/>
+      </svg>
+      <span><b>Cursinho IF</b><small>Preparatório para Institutos Federais</small></span>
+    </div>
+    <p class="legal">Projeto independente de preparação para processos seletivos. Não temos vínculo oficial com os Institutos Federais, com o Ministério da Educação ou com a Rede Federal de Educação Profissional. As cores verde, branca e vermelha são usadas apenas como referência visual ao universo dos IFs.</p>
+    <p class="legal">© 2026 Cursinho IF. Todos os direitos reservados.</p>
+  </div>
+</footer>
+
+<script>
+/* ---------- Cartão-resposta interativo ---------- */
+(function(){
+  var letras=['A','B','C','D','E'];
+  var certas=[2,0,3,1,4,2];          // gabarito (índice da letra)
+  var inicial=[2,0,3,1,3,2];         // marcações iniciais (a 5ª errada, para mostrar o vermelho)
+  var marcadas=new Array(certas.length).fill(-1);
+  var grade=document.getElementById('gabarito');
+  var placar=document.getElementById('placar');
+  var reduz=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  grade.appendChild(document.createElement('span'));
+  letras.forEach(function(l){var s=document.createElement('span');s.className='cab';s.textContent=l;grade.appendChild(s);});
+
+  var botoes=[];
+  certas.forEach(function(_,q){
+    var n=document.createElement('span');n.className='q';n.textContent=(q+1)+'.';grade.appendChild(n);
+    botoes[q]=[];
+    letras.forEach(function(l,i){
+      var b=document.createElement('button');
+      b.type='button';b.className='bol';b.textContent=l;
+      b.setAttribute('aria-label','Questão '+(q+1)+', alternativa '+l);
+      b.addEventListener('click',function(){marcar(q,i)});
+      grade.appendChild(b);botoes[q][i]=b;
+    });
+  });
+
+  function marcar(q,i){
+    marcadas[q]=i;
+    botoes[q].forEach(function(b,j){b.classList.remove('on','erro');if(j===i){b.classList.add(i===certas[q]?'on':'erro');}});
+    atualizar();
+  }
+  function atualizar(){
+    var acertos=0;marcadas.forEach(function(m,q){if(m===certas[q])acertos++});
+    placar.textContent=acertos+' de '+certas.length;
+  }
+
+  /* animação única de entrada: o cartão se preenche sozinho */
+  inicial.forEach(function(i,q){
+    if(reduz){marcar(q,i);}
+    else{setTimeout(function(){marcar(q,i)},500+q*380);}
+  });
+})();
+
+/* ---------- Máscara simples de WhatsApp ---------- */
+(function(){
+  var campo=document.getElementById('whatsapp');
+  campo.addEventListener('input',function(){
+    var d=campo.value.replace(/\D/g,'').slice(0,11),s='';
+    if(d.length>0)s='('+d.slice(0,2);
+    if(d.length>=3)s+=') '+d.slice(2,d.length>10?7:6);
+    if(d.length>(d.length>10?7:6))s+='-'+d.slice(d.length>10?7:6);
+    campo.value=s;
+  });
+})();
+
+/* ---------- Lista de espera ---------- */
+/* Para receber os cadastros de verdade, crie um formulário em um serviço como
+   Formspree, Getform ou Google Apps Script e cole a URL de envio abaixo.
+   Enquanto estiver vazio, os dados ficam salvos só no navegador de quem preencheu (modo de teste). */
+var ENDPOINT_LISTA_ESPERA='';
+
+(function(){
+  var form=document.getElementById('form-espera');
+  var erro=document.getElementById('erro-form');
+  var campos=document.getElementById('form-campos');
+  var ok=document.getElementById('ok');
+
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    erro.style.display='none';
+
+    if(!form.checkValidity()){
+      form.reportValidity();
+      erro.textContent='Preencha os campos obrigatórios e marque a autorização para continuar.';
+      erro.style.display='block';
+      return;
+    }
+
+    var dados=Object.fromEntries(new FormData(form).entries());
+    dados.enviadoEm=new Date().toISOString();
+    var btn=form.querySelector('button[type=submit]');
+    btn.disabled=true;btn.textContent='Enviando...';
+
+    function concluir(){
+      document.getElementById('ok-nome').textContent=(dados.nome||'').split(' ')[0];
+      campos.style.display='none';
+      ok.classList.add('mostrar');
+      ok.scrollIntoView({block:'center',behavior:'smooth'});
+    }
+
+    if(ENDPOINT_LISTA_ESPERA){
+      fetch(ENDPOINT_LISTA_ESPERA,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(dados)})
+        .then(function(r){if(!r.ok)throw new Error();concluir();})
+        .catch(function(){
+          btn.disabled=false;btn.textContent='Enviar e entrar na lista';
+          erro.textContent='Não foi possível enviar agora. Verifique sua conexão e tente de novo.';
+          erro.style.display='block';
+        });
+    }else{
+      try{
+        var lista=JSON.parse(localStorage.getItem('listaEsperaCursinhoIF')||'[]');
+        lista.push(dados);
+        localStorage.setItem('listaEsperaCursinhoIF',JSON.stringify(lista));
+      }catch(_){}
+      concluir();
+    }
+  });
+})();
+</script>
+</body>
+</html>
